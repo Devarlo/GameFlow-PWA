@@ -1,0 +1,47 @@
+.header-container {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  color: white;
+  z-index: var(--z-high);
+}
+
+.header-logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Login button (Guest Mode) */
+.header-login-btn {
+  background: var(--color-primary);
+  color: white;
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.header-login-btn:hover {
+  background: var(--color-accent);
+}
+
+/* Profile Icon */
+.header-profile-icon {
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.header-profile-icon:hover {
+  opacity: 0.8;
+}

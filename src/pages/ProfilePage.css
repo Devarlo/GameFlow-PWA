@@ -1,0 +1,123 @@
+.profile-container {
+  padding: 20px;
+  color: white;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid var(--deep-royal-purple);
+}
+
+.username {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.email {
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+.login-btn,
+.logout-btn {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: var(--deep-royal-purple);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: none;
+}
+
+.login-btn:hover,
+.logout-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Stats */
+.stats-section {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: #2d2327;
+  width: 120px;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid var(--deep-royal-purple);
+}
+
+.stat-card .value {
+  font-size: 24px;
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.stat-card .label {
+  opacity: 0.7;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 28px;
+}
+
+.section h3 {
+  margin-bottom: 12px;
+}
+
+/* Recently Played */
+.recent-grid {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.recent-game {
+  width: 80px;
+  height: 110px;
+  border-radius: 10px;
+  border: 2px solid var(--deep-royal-purple);
+}
+
+/* Achievements */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge {
+  background: #45364b;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 2px solid var(--deep-royal-purple);
+  font-size: 14px;
+}
+
+/* Settings */
+.settings-card {
+  background: #2d2327;
+  border: 2px solid var(--deep-royal-purple);
+  padding: 14px;
+  border-radius: 10px;
+}
+
+.settings-card p {
+  margin: 8px 0;
+  opacity: 0.9;
+}

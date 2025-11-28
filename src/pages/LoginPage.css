@@ -1,0 +1,119 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 520px;
+  background: linear-gradient(180deg, rgba(69,54,75,0.55), rgba(45,35,39,0.65));
+  padding: 28px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255,255,255,0.02);
+}
+
+.login-title {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.login-subtitle {
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.login-error {
+  background: rgba(255, 0, 0, 0.2);
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  color: #ff9c9c;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-with-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.input-action-btn {
+  background: transparent;
+  color: var(--text-primary);
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 10px 8px;
+}
+.input-action-btn:focus {
+  outline: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+}
+
+.login-input {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+  color: var(--text-primary);
+  width: 100%;
+}
+
+.login-input::placeholder {
+  color: #d3d3d3;
+}
+
+.login-input:focus {
+  outline: 2px solid rgba(140,147,168,0.14);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15) inset;
+}
+
+.login-btn {
+  background: var(--color-primary);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease;
+  width: 100%;
+  color: var(--text-primary);
+  border: none;
+}
+
+.login-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.login-btn:hover {
+  background: var(--color-accent);
+}
+
+.login-btn:active {
+  transform: translateY(1px);
+}
+
+.login-btn:focus {
+  outline: 2px solid rgba(0,0,0,0.12);
+}
+
+.login-register-text {
+  margin-top: 20px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.login-register-link {
+  color: var(--color-accent);
+  text-decoration: underline;
+}

@@ -1,0 +1,110 @@
+/* === MAIN DASHBOARD CONTAINER === */
+.dashboard-container {
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+/* === GREETING === */
+.dashboard-greeting {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* === QUICK MENU === */
+.quick-menu {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.quick-item {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 20px 14px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.25s ease;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.quick-item:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-3px);
+}
+
+/* === SECTION TITLE === */
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* === GAME HORIZONTAL SCROLL === */
+.scroll-row {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 6px;
+
+  scroll-snap-type: x mandatory;
+}
+
+.scroll-row::-webkit-scrollbar {
+  height: 5px;
+}
+
+.scroll-row::-webkit-scrollbar-thumb {
+  background: var(--color-plum);
+  border-radius: 20px;
+}
+
+.scroll-row::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+}
+
+/* === GAME CARD === */
+.game-card {
+  min-width: 140px;
+  max-width: 140px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  cursor: pointer;
+
+  scroll-snap-align: start;
+  transition: 0.25s ease;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.game-card img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.game-card:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.03);
+}
+
+.game-card p {
+  font-size: 14px;
+  font-weight: 500;
+}

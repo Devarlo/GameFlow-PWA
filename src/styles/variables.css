@@ -1,0 +1,59 @@
+/* Design token variables */
+:root {
+  /* Pallet */
+  --color-bg-dark: #2D2327; /* dark */
+  --color-bg-deep: #45364B; /* deep BG */
+  --color-plum: #62466B; /* primary palette */
+  --color-muted-purple: #8C93A8;
+  --color-soft-mint: #B5C2B7;
+
+  /* Primary & accent */
+  --color-primary: var(--color-plum);
+  --color-accent: var(--color-muted-purple);
+  --accent-color: var(--color-accent);
+  --text-primary: #ffffff;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+
+  /* Shadows */
+  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.35);
+
+  /* Z-index scale */
+  --z-top: 100;
+  --z-high: 50;
+
+  /* Navbar tokens */
+  --nav-bg: linear-gradient(180deg, var(--color-bg-deep), var(--color-bg-deep));
+  --nav-border: rgba(140, 147, 168, 0.12);
+  --nav-text: #cfcfcf;
+
+  /* Scrollbar */
+  --scroll-thumb: rgba(140, 147, 168, 0.9);
+  --scroll-track: rgba(0, 0, 0, 0.06);
+}
+
+/* Compatibility aliases (keep these here to avoid changing many files at once) */
+:root {
+  --bg-dark: var(--color-bg-dark);
+  --bg-deep: var(--color-bg-deep);
+  --color-muted-purple: var(--color-muted-purple);
+  --color-soft-mint: var(--color-soft-mint);
+  --color-plum: var(--color-plum);
+
+  --text-primary: var(--text-primary);
+  --accent-purple: var(--color-accent);
+  --color-primary: var(--color-primary);
+  --accent-color: var(--accent-color);
+  --deep-royal-purple: var(--color-plum);
+  --bg-gradient-main: linear-gradient(180deg, var(--color-bg-deep) 0%, var(--color-bg-dark) 100%);
+
+  --shadow-soft: var(--shadow-soft);
+  --z-top: var(--z-top);
+  --z-high: var(--z-high);
+  --nav-bg: var(--nav-bg);
+  --nav-border: var(--nav-border);
+  --nav-text: var(--nav-text);
+}

@@ -1,0 +1,71 @@
+.gd-container {
+  color: white;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.gd-cover {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.gd-title {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.gd-meta p {
+  margin: 4px 0;
+  opacity: 0.85;
+}
+
+.gd-description {
+  margin-top: 16px;
+  font-size: 15px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* LIBRARY SECTION */
+.gd-section-title {
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.gd-add-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background: var(--color-plum);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+.gd-library {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gd-library select,
+.gd-library input,
+.gd-library textarea {
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}

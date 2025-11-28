@@ -8,7 +8,7 @@ import ProfilePage from "../pages/ProfilePage";
 import GameDatabasePage from "../pages/GameDatabasePage";
 import MiniGamePage from "../pages/MiniGamePage";
 import MyGamesPage from "../pages/MyGamesPage";
-
+import GameDetailPage from "../pages/GameDetailPage";
 import AppShell from "../components/Layout/AppShell";
 
 // Protected route untuk halaman tertentu saja
@@ -33,6 +33,7 @@ export default function AppRoutes() {
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="games" element={<GameDatabasePage />} />
+        <Route path="game/:id" element={<GameDetailPage />} />
         <Route path="minigame" element={<MiniGamePage />} />
 
         {/* MyGames butuh login */}

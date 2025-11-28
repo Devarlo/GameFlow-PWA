@@ -19,7 +19,7 @@
 }
 
 .db-search::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgb(247, 246, 246);
 }
 
 /* FILTER ROW */
@@ -87,7 +87,7 @@
 .db-sort select {
   width: 100%;
   padding: 10px;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.18);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: var(--radius-md);
   color: var(--text-primary);

@@ -1,16 +1,25 @@
-/* GOOGLE FONT */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-@import './styles/variables.css';
-
-/* Tokens are now declared in `src/styles/variables.css` */
-::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.06);
+/* RESET & GLOBAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Improve Firefox look for app scrollers */
-* { scrollbar-width: thin; scrollbar-color: rgba(140,147,168,0.9) rgba(0,0,0,0.06); }
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* hanya .app-content yg boleh scroll */
+  background: var(--bg-dark);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
 
-/* ===== COLOR VARIABLES (dari PALLET) ===== */
+  display: block !important; /* mencegah flex center bawaan Vite */
+}
+
+/* GOOGLE FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+/* PALET WARNA */
 :root {
   --bg-dark: #2D2327;
   --bg-deep: #45364B;
@@ -25,23 +34,8 @@
   --radius-lg: 18px;
 }
 
-/* Compatibility variable aliases (keeps old component styles working) */
-:root {
-  /* Primary / Accent */
-  --color-primary: var(--color-plum);
-  --color-accent: var(--accent-purple);
-  --accent-color: var(--accent-purple);
-
-  /* Secondary/Brand */
-  --deep-royal-purple: var(--color-plum);
-  --bg-gradient-main: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-dark) 100%);
-
-  /* Shadows & z-index helpers */
-  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.35);
-  --z-top: 100;
-  --z-high: 50;
-
-  /* Navbar tokens */
-  --nav-bg: var(--bg-deep);
-  --nav-border: rgba(255,255,255,0.03);
+/* SCROLLBAR GLOBAL (matikan track halaman) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* HILANGKAN scrollbar halaman */
 }

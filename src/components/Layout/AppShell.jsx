@@ -5,9 +5,13 @@ import "./AppShell.css";
 export default function AppShell() {
   return (
     <div className="app-shell">
-      <main className="app-content">
-        <Outlet />
-      </main>
+
+      {/* Full screen scroll area */}
+      <div className="scroll-wrapper">
+        <main className="app-inner">
+          <Outlet />
+        </main>
+      </div>
 
       <BottomNavigator />
     </div>

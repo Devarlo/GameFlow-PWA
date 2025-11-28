@@ -1,47 +1,50 @@
-/* ==== APP SHELL WRAPPER ==== */
+/* ===== APP WRAPPER ===== */
 .app-shell {
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100%;
   background: var(--bg-dark);
-  overflow: hidden;
+  overflow: hidden; /* prevent body scroll */
 }
 
-/* ==== APP CONTENT ==== */
-.app-content {
+/* ===== FULL WIDTH SCROLL WRAPPER ===== */
+.scroll-wrapper {
   flex: 1;
   overflow-y: auto;
   width: 100%;
+}
+
+/* ===== INNER CONTENT (CENTERED) ===== */
+.app-inner {
+  width: 100%;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 20px 20px 90px; /* bottom padding biar tidak ketutup navbar */
+  padding: 20px 24px 90px;
   box-sizing: border-box;
 }
 
-/* Scrollbar only for app content area */
-.app-content::-webkit-scrollbar {
+/* ===== CUSTOM SCROLLBAR (NOW AT RIGHT EDGE) ===== */
+.scroll-wrapper::-webkit-scrollbar {
   width: 10px;
 }
-.app-content::-webkit-scrollbar-thumb {
-  background: rgba(80, 68, 78, 0.6); /* subtle thumb that blends */
+.scroll-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(80, 68, 78, 0.6);
   border-radius: 9999px;
-  border: 2px solid rgba(45, 35, 39, 0.6);
 }
-.app-content::-webkit-scrollbar-track {
-  background: transparent; /* keep track transparent so content edge looks clean */
-}
-.app-content { scrollbar-color: rgba(80,68,78,0.6) transparent; }
-
-/* ==== BOTTOM NAV ==== (minor wrapper rules only) */
-.bottom-nav {
-  font-size: 16px; /* size the label smaller; icon is handled via .icon */
-  color: var(--text-primary);
-  text-decoration: none;
-  transition: all 0.2s ease;
+.scroll-wrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
 }
 
-.bottom-nav .nav-item:hover {
-  transform: scale(1.15);
-  color: var(--accent-purple);
+/* ===== BOTTOM NAV ===== */
+.bottom-nav 
+{ font-size: 16px; /* size the label smaller; icon is handled via .icon */ 
+  color: var(--text-primary); 
+  text-decoration: none; 
+  transition: all 0.2s ease; 
+} 
+
+.bottom-nav .nav-item:hover { 
+  transform: scale(1.15); 
+  color: var(--accent-purple); 
 }

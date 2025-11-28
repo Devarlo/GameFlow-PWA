@@ -1,10 +1,6 @@
-import { useEffect, useState } from "react";
-import {
-  getGenres,
-  getPlatforms,
-  getDevelopers,
-  getPublishers,
-} from "../services/metadataService";
+// src/hooks/useMetadata.js
+import { useState, useEffect } from "react";
+import { supabase } from "../config/supabaseClient";
 
 export function useMetadata() {
   const [genres, setGenres] = useState([]);
@@ -14,15 +10,15 @@ export function useMetadata() {
 
   useEffect(() => {
     async function load() {
-      const g = await getGenres();
-      const p = await getPlatforms();
-      const d = await getDevelopers();
-      const pub = await getPublishers();
+      const g = await supabase.from("genres").select("*").order("name");
+      const p = await supabase.from("platforms").select("*").order("name");
+      const d = await supabase.from("developers").select("*").order("name");
+      const pb = await supabase.from("publishers").select("*").order("name");
 
       if (!g.error) setGenres(g.data);
       if (!p.error) setPlatforms(p.data);
       if (!d.error) setDevelopers(d.data);
-      if (!pub.error) setPublishers(pub.data);
+      if (!pb.error) setPublishers(pb.data);
     }
 
     load();

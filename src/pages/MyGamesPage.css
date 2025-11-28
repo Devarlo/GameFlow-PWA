@@ -1,121 +1,43 @@
-.my-games-container {
-  padding: 20px;
-  color: white;
+.mg-container {
+  color: var(--text-primary);
 }
 
-.title {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Tabs */
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.tabs button {
-  padding: 10px 20px;
-  border-radius: 8px;
-  background: #2d2327;
-  border: 2px solid var(--deep-royal-purple);
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.tabs button.active {
-  background: var(--deep-royal-purple);
-  transform: scale(1.05);
-}
-
-.tabs button:hover {
-  transform: scale(1.05);
-}
-
-/* Stats */
-.stats {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
-}
-
-.stat-card {
-  background: #2d2327;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: center;
-  width: 120px;
-  border: 2px solid var(--deep-royal-purple);
-}
-
-.stat-card .label {
-  opacity: 0.8;
-}
-
-.stat-card .value {
-  font-size: 22px;
-  font-weight: bold;
-  color: var(--accent-color);
-}
-
-/* Game Grid */
-.games-grid {
+.mg-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
+  margin-top: 12px;
 }
 
-.game-card {
-  background: #2d2327;
-  padding: 10px;
+.mg-card {
+  background: rgba(255,255,255,0.02);
   border-radius: 10px;
-  border: 2px solid var(--deep-royal-purple);
-  text-align: center;
+  padding: 12px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
 }
 
-.game-card img {
+.mg-card img {
   width: 100%;
+  height: 120px;
+  object-fit: cover;
   border-radius: 8px;
 }
 
-.game-card h3 {
-  margin: 10px 0 5px;
-  font-size: 16px;
-}
-
-.genre {
-  opacity: 0.8;
-  font-size: 14px;
-}
-
-.rating {
-  margin: 5px 0;
-  font-weight: bold;
-}
-
-/* Buttons */
-.move-btn {
-  padding: 8px 12px;
+.mg-controls {
+  display: flex;
+  gap: 8px;
   margin-top: 8px;
-  width: 100%;
-  background: var(--accent-color);
-  border: none;
-  border-radius: 8px;
-  color: black;
-  cursor: pointer;
-  font-weight: bold;
 }
 
-.delete-btn {
-  padding: 8px 12px;
-  margin-top: 8px;
-  width: 100%;
-  background: crimson;
-  border: none;
+.mg-controls button {
+  padding: 8px 10px;
   border-radius: 8px;
-  cursor: pointer;
+  border: none;
+  background: var(--color-plum);
   color: white;
+  cursor: pointer;
 }

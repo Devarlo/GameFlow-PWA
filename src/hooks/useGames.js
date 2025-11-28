@@ -1,5 +1,6 @@
+// src/hooks/useGames.js
 import { useEffect, useState } from "react";
-import { getAllGames } from "../services/gameService";
+import { supabase } from "../config/supabaseClient";
 
 export function useGames() {
   const [games, setGames] = useState([]);
@@ -8,12 +9,13 @@ export function useGames() {
   useEffect(() => {
     async function load() {
       setLoading(true);
-      const { data, error } = await getAllGames();
 
-      if (!error && data) {
-        setGames(data);
-      }
+      const { data, error } = await supabase
+        .from("v_games_full")
+        .select("*")
+        .order("title");
 
+      if (!error) setGames(data);
       setLoading(false);
     }
 

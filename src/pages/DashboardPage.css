@@ -51,7 +51,11 @@
   font-weight: 500;
   font-size: 14px;
 }
-
+ .greeting-avatar img{
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+ }
 /* QUICK MENU - bigger tiles */
 .quick-menu {
   display: flex;

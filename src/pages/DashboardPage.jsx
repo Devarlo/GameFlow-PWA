@@ -31,7 +31,10 @@ export default function DashboardPage() {
 
         {/* GREETING */}
         <div className="dashboard-greeting">
-          <div className="greeting-avatar">🎮</div>
+          <div className="greeting-avatar"> <img
+          src="/public/GameFlow.png"
+          alt="App Logo"
+        /></div>
 
           <div>
             <span>Welcome, {user?.email}</span>

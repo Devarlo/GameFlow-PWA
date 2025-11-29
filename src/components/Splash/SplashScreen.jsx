@@ -21,7 +21,11 @@ export default function SplashScreen() {
 
   return (
     <div className="splash-container">
-      <h1 className="splash-logo">GameFlow</h1>
+       <img
+          src="/public/GameFlow.png"
+          alt="App Logo"
+          className="w-32 h-32 splash-logo mb-6"
+        />
       <div className="splash-loader"></div>
     </div>
   );

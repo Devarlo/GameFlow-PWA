@@ -1,43 +1,57 @@
-.mg-container {
-  color: var(--text-primary);
+/* MyGamesPage.css - PS5 Futuristic */
+.mg-container{
+  padding:28px 20px 100px;
+  color:var(--text-primary);
+  display:flex;
+  justify-content:center;
+}
+.gf-inner{ width:100%; max-width:1100px; }
+
+/* header */
+.mg-container h2{ font-size:20px; margin:0 0 10px; font-weight:800; }
+
+/* filters */
+.mg-filters{ display:flex; gap:12px; margin-bottom:12px; }
+.mg-filters select{
+  padding:10px 12px; border-radius:10px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); color:var(--text-primary);
 }
 
-.mg-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 12px;
+/* empty & loading */
+.mg-loading, .mg-empty{ color:var(--muted); text-align:center; margin-top:36px; }
+
+/* list */
+.mg-list{ display:flex; flex-direction:column; gap:14px; }
+
+/* card */
+.mg-card{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:14px;
+  padding:12px;
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 16px 38px rgba(10,6,12,0.6);
 }
 
-.mg-card {
-  background: rgba(255,255,255,0.02);
-  border-radius: 10px;
-  padding: 12px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
+/* cover */
+.mg-cover-box{ width:120px; flex-shrink:0; }
+.mg-cover{ width:100%; border-radius:10px; object-fit:cover; }
+
+/* info */
+.mg-info{ display:flex; flex-direction:column; gap:8px; width:100%; }
+.mg-info h3{ margin:0; font-size:16px; font-weight:700; color:var(--text-primary); }
+.mg-info label{ font-size:13px; color:var(--muted); }
+
+/* inputs */
+.mg-info input[type="number"], .mg-info select{
+  padding:8px 10px; border-radius:10px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); color:var(--text-primary);
+  width:150px;
 }
 
-.mg-card img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.mg-controls {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.mg-controls button {
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: none;
-  background: var(--color-plum);
-  color: white;
-  cursor: pointer;
+/* small responsive */
+@media(max-width:700px){
+  .mg-card{ flex-direction:column; align-items:flex-start; }
+  .mg-cover-box{ width:100%; }
+  .mg-info input[type="number"], .mg-info select{ width:100%; }
 }

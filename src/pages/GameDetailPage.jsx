@@ -1,179 +1,221 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { getGameBySlug, updateMyGame } from "../services/gameService";
+import { addToMyGames as addToMyGamesService } from "../services/myGamesService";
+import { useAuth } from "../hooks/useAuth";
 import { supabase } from "../config/supabaseClient";
 import "./GameDetailPage.css";
 
 export default function GameDetailPage() {
-  const { id } = useParams();
+  const { slug } = useParams();
+  const { user } = useAuth();
 
   const [game, setGame] = useState(null);
+  const [myEntry, setMyEntry] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showStatusSelector, setShowStatusSelector] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState("wishlist");
+  const [showToast, setShowToast] = useState(false);
 
-  // user library states
-  const [myStatus, setMyStatus] = useState("");
-  const [rating, setRating] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [notes, setNotes] = useState("");
-
-  // load game detail from supabase
   useEffect(() => {
-    async function loadGame() {
-      const { data, error } = await supabase
-        .from("v_games_full")
-        .select("*")
-        .eq("id", id)
-        .single();
+    async function load() {
+      setLoading(true);
 
-      if (!error) setGame(data);
+      const { data } = await getGameBySlug(slug);
+      setGame(data);
+
+      if (user) {
+        const { data: entry } = await supabase
+          .from("my_games")
+          .select("*")
+          .eq("user_id", user.id)
+          .eq("game_id", data.id)
+          .single();
+
+        setMyEntry(entry);
+      }
       setLoading(false);
     }
 
-    loadGame();
-  }, [id]);
+    load();
+  }, [slug, user]);
 
-  // load my_games entry (if exists)
-  useEffect(() => {
-    async function loadMyGame() {
-      const userId = localStorage.getItem("user_id");
-      if (!userId) return;
+  if (loading) return <p className="detail-loading">Loading...</p>;
+  if (!game) return <p className="detail-error">Game not found.</p>;
 
-      const { data } = await supabase
-        .from("my_games")
-        .select("*")
-        .eq("user_id", userId)
-        .eq("game_id", id)
-        .maybeSingle();
-
-      if (data) {
-        setMyStatus(data.status);
-        setProgress(data.progress || 0);
-        setRating(data.rating || 0);
-        setNotes(data.notes || "");
-      }
+  function handleAdd() {
+    if (!user) {
+      window.location.href = "/login";
+      return;
     }
+    setSelectedStatus("wishlist");
+    setShowStatusSelector(true);
+  }
 
-    loadMyGame();
-  }, [id]);
+  async function handleConfirmAdd() {
+    try {
+      const data = await addToMyGamesService(
+        user.id,
+        game.id,
+        selectedStatus,
+        ""
+      );
+      setMyEntry(data);
+      setShowStatusSelector(false);
+      window.dispatchEvent(new CustomEvent("mygames:updated"));
 
-  // add to library
-  async function addToMyGames() {
-    const userId = localStorage.getItem("user_id");
-    if (!userId) return alert("You must login first!");
-
-    const { error } = await supabase.from("my_games").insert([
-      {
-        user_id: userId,
-        game_id: id,
-        status: "wishlist",
-      },
-    ]);
-
-    if (!error) {
-      setMyStatus("wishlist");
-      alert("Added to your library!");
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2500);
+    } catch (err) {
+      console.error(err);
+      setShowStatusSelector(false);
     }
   }
 
-  // update library
-  async function updateLibrary(field, value) {
-    const userId = localStorage.getItem("user_id");
-    if (!userId) return;
-
-    await supabase
-      .from("my_games")
-      .update({ [field]: value })
-      .eq("user_id", userId)
-      .eq("game_id", id);
-
-    if (field === "status") setMyStatus(value);
-    if (field === "rating") setRating(value);
-    if (field === "progress") setProgress(value);
-    if (field === "notes") setNotes(value);
+  async function handleUpdate(field, value) {
+    if (!myEntry) return;
+    const { data } = await updateMyGame(myEntry.id, { [field]: value });
+    setMyEntry(data);
   }
-
-  if (loading) return <p className="gd-loading">Loading...</p>;
-  if (!game) return <p className="gd-error">Game not found.</p>;
 
   return (
-    <div className="gd-container">
+    <div className="detail-container">
+      <div className="gf-inner">
 
-      {/* COVER */}
-      <img src={game.cover_url} className="gd-cover" />
+        <div className="detail-grid">
 
-      {/* TITLE */}
-      <h1 className="gd-title">{game.title}</h1>
+          <div className="detail-left">
+            <img
+              src={game.cover_url}
+              className="detail-cover"
+              alt={game.title}
+            />
+          </div>
 
-      {/* META */}
-      <div className="gd-meta">
-        <p><strong>Release:</strong> {game.release_date || "TBA"}</p>
-        <p><strong>Developer:</strong> {game.developer?.name || "-"}</p>
-        <p><strong>Publisher:</strong> {game.publisher?.name || "-"}</p>
+          <div className="detail-right">
+            <h1 className="detail-title">{game.title}</h1>
 
-        <p>
-          <strong>Genres:</strong>{" "}
-          {game.genres_list?.map((g) => g.name).join(", ")}
-        </p>
+            <p className="detail-desc">{game.description}</p>
 
-        <p>
-          <strong>Platforms:</strong>{" "}
-          {game.platforms_list?.map((p) => p.name).join(", ")}
-        </p>
-      </div>
+            <div className="detail-meta">
+              <p><strong>Genres:</strong> {game.genres_list?.map((g) => g.name).join(", ")}</p>
+              <p><strong>Platforms:</strong> {game.platforms_list?.map((p) => p.name).join(", ")}</p>
+              <p><strong>Developer:</strong> {game.developer?.name}</p>
+              <p><strong>Publisher:</strong> {game.publisher?.name}</p>
+            </div>
 
-      {/* DESCRIPTION */}
-      <p className="gd-description">{game.description}</p>
+            {/* ADD */}
+            {user && !myEntry && (
+              <button className="detail-add-btn" onClick={handleAdd}>
+                + Add to My Games
+              </button>
+            )}
 
-      {/* --- MY GAME ACTIONS --- */}
-      <div className="gd-section-title">My Library</div>
+            {!user && (
+              <p>Please <a href="/login">log in</a> to add this game.</p>
+            )}
 
-      {!myStatus ? (
-        <button className="gd-add-btn" onClick={addToMyGames}>
-          + Add to My Games
-        </button>
-      ) : (
-        <div className="gd-library">
+            {/* MY ENTRY */}
+            {user && myEntry && (
+              <div className="detail-my-controls">
+                <p className="detail-added">Added to your library</p>
 
-          {/* STATUS */}
-          <label>Status</label>
-          <select
-            value={myStatus}
-            onChange={(e) => updateLibrary("status", e.target.value)}
-          >
-            <option value="wishlist">Wishlist</option>
-            <option value="playing">Playing</option>
-            <option value="completed">Completed</option>
-          </select>
+                <div style={{ display: "flex", gap: 10 }}>
+                  <button
+                    className="detail-update-btn"
+                    onClick={() => handleUpdate("status", "playing")}
+                  >
+                    Mark Playing
+                  </button>
 
-          {/* RATING */}
-          <label>Rating (0–10)</label>
-          <input
-            type="number"
-            min="0"
-            max="10"
-            value={rating}
-            onChange={(e) => updateLibrary("rating", e.target.value)}
-          />
+                  <button
+                    className="detail-update-btn"
+                    onClick={() => handleUpdate("status", "completed")}
+                  >
+                    Mark Completed
+                  </button>
 
-          {/* PROGRESS */}
-          <label>Progress (%)</label>
-          <input
-            type="number"
-            min="0"
-            max="100"
-            value={progress}
-            onChange={(e) => updateLibrary("progress", e.target.value)}
-          />
+                  <Link
+                    to="/app/mygames"
+                    className="detail-update-btn"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Go to My Games
+                  </Link>
+                </div>
+              </div>
+            )}
 
-          {/* NOTES */}
-          <label>Your Notes</label>
-          <textarea
-            value={notes}
-            onChange={(e) => updateLibrary("notes", e.target.value)}
-          />
-
+          </div>
         </div>
-      )}
 
+        {/* STATUS MODAL */}
+        {showStatusSelector && (
+          <div className="modal-overlay" onClick={() => setShowStatusSelector(false)}>
+            <div className="status-modal" onClick={(e) => e.stopPropagation()}>
+              <h3>Select status to add</h3>
+
+              <div className="status-options">
+
+                <label>
+                  <input
+                    type="radio"
+                    name="status"
+                    value="wishlist"
+                    checked={selectedStatus === "wishlist"}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                  />
+                  Wishlist
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    name="status"
+                    value="playing"
+                    checked={selectedStatus === "playing"}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                  />
+                  Playing
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    name="status"
+                    value="completed"
+                    checked={selectedStatus === "completed"}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                  />
+                  Completed
+                </label>
+
+              </div>
+
+              <div className="status-actions">
+                <button className="detail-add-btn" onClick={handleConfirmAdd}>
+                  Add
+                </button>
+                <button
+                  className="detail-update-btn"
+                  onClick={() => setShowStatusSelector(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+
+            </div>
+          </div>
+        )}
+
+        {showToast && <div className="gf-toast">Added to My Games</div>}
+
+      </div>
     </div>
   );
 }

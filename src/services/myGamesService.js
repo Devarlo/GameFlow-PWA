@@ -23,6 +23,7 @@ export async function getMyGamesByUser(userId) {
  * returns inserted row
  */
 export async function addToMyGames(userId, gameId, status = "wishlist", notes = "") {
+  console.log("[myGamesService.addToMyGames] Inserting:", { userId, gameId, status, notes });
   const { data, error } = await supabase
     .from("my_games")
     .insert([{ user_id: userId, game_id: gameId, status, notes }])
@@ -30,9 +31,13 @@ export async function addToMyGames(userId, gameId, status = "wishlist", notes = 
     .single();
 
   if (error) {
-    console.error("addToMyGames error:", error);
+    console.error("[myGamesService.addToMyGames] Insert error:", error);
+    console.error("[myGamesService.addToMyGames] Error code:", error.code);
+    console.error("[myGamesService.addToMyGames] Error details:", error.details);
+    console.error("[myGamesService.addToMyGames] Error hint:", error.hint);
     throw error;
   }
+  console.log("[myGamesService.addToMyGames] Insert success:", data);
   return data;
 }
 

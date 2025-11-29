@@ -20,22 +20,119 @@ html, body {
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 /* PALET WARNA */
-:root {
-  --bg-dark: #2D2327;
+:root{
+  --bg: #2D2327;              /* darkest */
   --bg-deep: #45364B;
-  --color-plum: #62466B;
-  --color-muted-purple: #8C93A8;
-  --color-soft-mint: #B5C2B7;
-
-  --text-primary: #ffffff;
-  --accent-purple: #8C93A8;
-
-  --radius-md: 10px;
-  --radius-lg: 18px;
+  --card-bg: rgba(255,255,255,0.04);
+  --card-glass: rgba(255,255,255,0.03);
+  --text-primary: #E9E3E6;    /* light */
+  --muted: #B5C2B7;
+  --accent-1: #8C93A8;        /* cool gray */
+  --accent-plum: #62466B;     /* deep plum */
+  --glow-purple: rgba(130,80,200,0.18);
+  --glow-blue: rgba(70,150,255,0.12);
+  --neon: linear-gradient(135deg, rgba(120,80,220,0.22), rgba(70,120,255,0.18));
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
 }
+
 
 /* SCROLLBAR GLOBAL (matikan track halaman) */
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none; /* HILANGKAN scrollbar halaman */
+}
+.gf-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+body {
+  background: #1c1417;
+}
+
+/* PS DARK CARD */
+.ps-card {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+.ps-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-4px);
+}
+
+/* Database container */
+.db-container .gf-inner {
+  background: rgba(255,255,255,0.03);
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
+}
+
+/* Profile & MyGames */
+.mg-container,
+.profile-page {
+  background: transparent !important;
+}
+
+/* Stats & settings fix */
+.settings-card,
+.stat-box {
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* === GLOBAL LAYOUT FIX === */
+body {
+  background: #110b0c; /* lebih gelap seperti PS Store */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* Hilangkan max-width di semua container */
+.dashboard-container,
+.db-container,
+.mg-container,
+.profile-page {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 20px 40px; /* kanan kiri lebih longgar */
+  box-sizing: border-box;
+}
+
+/* buat section tidak berada di tengah */
+.dashboard-container > *,
+.db-container > *,
+.profile-page > * {
+  margin-left: 0 !important;
+}
+
+/* quick menu full */
+.quick-menu {
+  width: 100%;
+}
+
+/* database wrapper */
+.db-container {
+  background: rgba(255,255,255,0.03);
+  border-radius: 18px;
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+}
+
+/* remove central alignment */
+.profile-header,
+.profile-stats,
+.section {
+  width: 100%;
+  text-align: left !important;
 }

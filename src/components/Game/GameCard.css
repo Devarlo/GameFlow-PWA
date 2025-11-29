@@ -1,10 +1,11 @@
 .game-card-box {
   background: rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  transition: 0.25s ease;
-  box-shadow: var(--shadow-soft);
+  transition: 0.18s ease;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.45);
+  padding: 8px;
 }
 
 .game-card-box:hover {
@@ -14,22 +15,22 @@
 
 .game-cover {
   width: 100%;
-  height: 170px;
+  height: 150px;
   object-fit: cover;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
 }
 
 .game-info {
-  padding: 10px;
+  padding: 8px 6px;
 }
 
 .game-title {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 2px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
 }
 
 .game-genre {
-  font-size: 12px;
-  opacity: 0.8;
+  font-size: 11px;
+  opacity: 0.85;
 }

@@ -1,270 +1,172 @@
-/* ===============================
-   DASHBOARD PAGE — FINAL VERSION
-   Clean PS-Store Style UI
-=================================*/
-
-/* PAGE CONTAINER */
-.dashboard-container {
-  min-height: 100vh;
-  background: radial-gradient(1200px 400px at 10% 10%, rgba(110, 60, 200, 0.06), transparent),
-              linear-gradient(180deg, var(--bg), #241a1b 120%);
-  color: var(--text-primary);
-  padding: 28px 20px 80px;
+/* ===== Dashboard Page ===== */
+.dashboard-page {
+  width: 100%;
   display: flex;
   justify-content: center;
+
+  background: radial-gradient(
+      1200px 600px at 12% 10%,
+      rgba(120, 80, 200, 0.06),
+      transparent
+    ),
+    linear-gradient(180deg, var(--bg-900), var(--bg-800));
+  padding-bottom: 80px;
 }
 
-/* INNER WRAPPER */
+/* INNER */
 .gf-inner {
-  width: 100%;
-  max-width: 1100px;
   display: flex;
   flex-direction: column;
   gap: 28px;
 }
 
-
-/* ===============================
-   HERO GREETING SECTION
-=================================*/
-
-.dashboard-greeting {
+/* ===== GREETING CARD ===== */
+.dash-greeting {
   display: flex;
-  gap: 18px;
+  gap: 20px;
   align-items: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-  padding: 20px 24px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(20, 12, 20, 0.55);
-  font-weight: 700;
-  width: 100%;
-  position: relative;
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
 }
 
-/* logo/brand container */
-.greeting-avatar {
-  width: 90px;
-  height: 90px;
-  border-radius: 18px;
+.dash-avatar {
+  width: 82px;
+  height: 82px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
   overflow: hidden;
-  flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.03);
   display: flex;
-  align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  align-items: center;
 }
 
-/* logo image */
-.logo-img {
-  width: 300%;
-  height: 300%;
+.dash-avatar img {
+  width: 260%;
+  height: 260%;
   object-fit: contain;
 }
 
-/* greeting text block */
-.greeting-text h2 {
-  font-size: 20px;
-  margin: 0;
-  color: var(--text-primary);
+.greet-title {
+  font-size: 22px;
+  font-weight: 700;
 }
 
-.greeting-sub {
+.greet-sub {
+  color: var(--muted);
   margin-top: 4px;
-  opacity: .8;
-  font-weight: 500;
-  font-size: 14px;
 }
 
-
-/* ===============================
-   QUICK MENU
-=================================*/
-
-.quick-menu {
+/* ===== QUICK MENU ===== */
+.quick-row {
   display: flex;
-  gap: 16px;
+  gap: 14px;
 }
 
-.quick-item {
+.quick-card {
   flex: 1;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.015));
-  border-radius: 16px;
   padding: 16px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 10px 30px rgba(12,6,18,0.55);
+  text-align: left;
+
   display: flex;
   gap: 12px;
   align-items: center;
   cursor: pointer;
-
-  border: 1px solid rgba(120, 80, 200, 0.08);
-  box-shadow: 0 8px 24px rgba(20, 12, 20, 0.45),
-              0 0 22px rgba(120, 80, 200, 0.06);
-  transition: transform .18s ease, box-shadow .18s ease;
+  transition: transform .16s ease, box-shadow .2s ease;
 }
 
-.quick-item .qi-icon {
-  min-width: 64px;
-  min-height: 64px;
-  border-radius: 12px;
+.quick-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(20,12,30,0.75),
+              0 0 40px rgba(120,80,220,0.14);
+}
 
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+.qi-icon {
+  min-width: 54px;
+  min-height: 54px;
+  border-radius: 12px;
+  font-size: 28px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
 
-  box-shadow: 0 8px 18px rgba(80, 40, 160, 0.12),
-              0 0 14px var(--glow-blue);
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  box-shadow: 0 8px 22px rgba(70,80,220,0.12);
 }
 
-.quick-item p {
+.quick-card p {
   margin: 0;
   font-weight: 600;
-  font-size: 15px;
   color: var(--muted);
 }
 
-.quick-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 
-    0 18px 48px rgba(24, 14, 30, 0.65),
-    0 0 30px rgba(120, 80, 200, 0.14);
-}
-
-
-/* ===============================
-   SECTION TITLE
-=================================*/
-
-.section-title {
+/* ===== SECTIONS ===== */
+.section-header {
   font-size: 18px;
   font-weight: 700;
-  margin: 4px 0 8px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  margin-top: 6px;
 }
 
-
-/* ===============================
-   HORIZONTAL SCROLL ROW
-=================================*/
-
-.scroll-row {
+/* ===== HORIZONTAL SCROLL ===== */
+.scroll-strip {
   display: flex;
   gap: 18px;
   overflow-x: auto;
-  padding: 12px 4px;
+  padding-bottom: 8px;
   scroll-snap-type: x mandatory;
 }
 
-.scroll-row::-webkit-scrollbar {
-  height: 8px;
+.scroll-strip::-webkit-scrollbar {
+  height: 6px;
+}
+.scroll-strip::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
 }
 
-.scroll-row::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    90deg,
-    rgba(140, 80, 220, 0.35),
-    rgba(80, 120, 255, 0.26)
-  );
-  border-radius: 24px;
-}
-
-
-/* ===============================
-   GAME CARD (PS-Store Style)
-=================================*/
-
-.game-card {
-  min-width: 210px;
-  max-width: 210px;
-
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-  border-radius: 16px;
-  padding: 12px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+/* ===== GAME CARD (TILE) ===== */
+.game-tile {
+  min-width: 200px;
   scroll-snap-align: start;
+  padding: 10px;
+  border-radius: 14px;
 
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  box-shadow:
-    0 18px 40px rgba(16, 10, 16, 0.6),
-    0 0 22px rgba(120, 80, 220, 0.07);
-
-  cursor: pointer;
-  transition: transform .18s ease, box-shadow .18s ease;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 14px 40px rgba(14,10,18,0.55);
+  transition: transform .18s ease;
 }
 
-.game-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow:
-    0 30px 80px rgba(12, 6, 18, 0.75),
-    0 0 40px rgba(120, 90, 240, 0.15);
+.game-tile:hover {
+  transform: translateY(-8px);
 }
 
-/* cover */
-.game-card img {
+.game-tile img {
   width: 100%;
   height: 150px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: inset 0 0 32px rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
-/* title */
-.game-card p {
-  margin: 0;
+.game-tile p {
+  margin-top: 8px;
   font-size: 14px;
-  font-weight: 700;
-  color: var(--text-primary);
-
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  font-weight: 600;
 }
 
-
-/* ===============================
-   SMALL TRENDING CARDS
-=================================*/
-
-.scroll-row.small {
-  gap: 14px;
-}
-
-.scroll-row.small .game-card {
+/* SMALL VARIANT */
+.scroll-strip.small .game-tile {
   min-width: 160px;
   max-width: 160px;
-  height: 210px;
+  height: 220px;
 }
 
-
-/* ===============================
-   RESPONSIVE
-=================================*/
-
-@media (max-width: 900px) {
-  .gf-inner {
-    padding: 0 12px;
-  }
-
-  .greeting-avatar {
-    width: 65px;
-    height: 65px;
-  }
-
-  .game-card {
-    min-width: 160px;
-    max-width: 160px;
-  }
-
-  .quick-item .qi-icon {
-    min-width: 48px;
-    min-height: 48px;
-    font-size: 22px;
-  }
+@media(max-width: 900px) {
+  .dash-avatar { width: 64px; height: 64px; }
+  .game-tile { min-width: 160px; }
 }

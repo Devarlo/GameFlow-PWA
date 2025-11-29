@@ -1,0 +1,26 @@
+{
+  "name": "GameFlow",
+  "short_name": "GameFlow",
+  "description": "Database dari semua game",
+  "theme_color": "#62466B",
+  "background_color": "#150f12",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/GameFlow.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/GameFlow.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

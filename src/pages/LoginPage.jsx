@@ -19,62 +19,59 @@ export default function LoginPage() {
     const res = await authService.login(email, password);
 
     if (res.success) {
-      // update auth context
       login(res.user);
-      navigate("/app/dashboard"); // redirect setelah login
+      navigate("/app/dashboard");
     } else {
       setError(res.message || "Login failed");
     }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <h2 className="login-title">Welcome Back</h2>
-        <p className="login-subtitle">Login to continue</p>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2 className="auth-title">Welcome Back</h2>
+        <p className="auth-subtitle">Log in to continue</p>
 
-        {error && <p className="login-error">{error}</p>}
+        {error && <p className="auth-error">{error}</p>}
 
-        <form onSubmit={handleLogin} className="login-form">
-        <input
-          type="email"
-          placeholder="Email"
-          className="login-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          aria-label="Email"
-        />
+        <form onSubmit={handleLogin} className="auth-form">
 
-        <div className="input-with-action">
           <input
-           type={showPassword ? "text" : "password"}
-          placeholder="Password"
-          className="login-input"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          aria-label="Password"
-        />
-          <button
-            type="button"
-            className="input-action-btn"
-            onClick={() => setShowPassword((s) => !s)}
-            aria-label="Toggle password visibility"
-          >
-            {showPassword ? "Hide" : "Show"}
-          </button>
-        </div>
+            type="email"
+            className="auth-input"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <button className="login-btn" type="submit" disabled={!email || !password}>
-          Login
-        </button>
+          <div className="auth-input-group">
+            <input
+              type={showPassword ? "text" : "password"}
+              className="auth-input"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              className="auth-action-btn"
+              onClick={() => setShowPassword((s) => !s)}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
+
+          <button className="auth-btn" type="submit" disabled={!email || !password}>
+            Login
+          </button>
         </form>
 
-        <p className="login-register-text">
+        <p className="auth-switch-text">
           Don’t have an account?{" "}
-          <Link to="/register" className="login-register-link">
-            Register here
+          <Link to="/register" className="auth-link">
+            Register
           </Link>
         </p>
       </div>

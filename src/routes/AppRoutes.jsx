@@ -21,27 +21,28 @@ const ProtectedRoute = ({ children }) => {
 export default function AppRoutes() {
   return (
     <Routes>
+
+      {/* Splashscreen → langsung ke dashboard tanpa login */}
       <Route path="/" element={<SplashScreen />} />
 
-      {/* Auth */}
+      {/* Auth pages */}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
 
-      {/* Inside App Shell */}
+      {/* APP STRUCTURE */}
       <Route path="/app" element={<AppShell />}>
 
-        {/* default redirect */}
+        {/* Default route → dashboard */}
         <Route index element={<Navigate to="/app/dashboard" replace />} />
 
+        {/* bebas akses */}
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="games" element={<GameDatabasePage />} />
-
-        {/* ⭐ FIXED DETAIL PAGE ROUTE */}
         <Route path="game/:slug" element={<GameDetailPage />} />
-
         <Route path="minigame" element={<MiniGamePage />} />
 
+        {/* HANYA ini yang memerlukan login */}
         <Route
           path="mygames"
           element={
@@ -51,7 +52,7 @@ export default function AppRoutes() {
           }
         />
 
-        {/* unknown paths */}
+        {/* fallback */}
         <Route path="*" element={<Navigate to="/app/dashboard" replace />} />
       </Route>
 

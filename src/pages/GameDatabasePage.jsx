@@ -20,11 +20,12 @@ export default function GameDatabasePage() {
   const ITEMS_PER_LOAD = 12;
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_LOAD);
 
+  // Infinite scroll
   useEffect(() => {
     function handleScroll() {
       const bottom =
         window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 200;
+        document.body.offsetHeight - 250;
 
       if (bottom) setVisibleCount((p) => p + ITEMS_PER_LOAD);
     }
@@ -33,15 +34,14 @@ export default function GameDatabasePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Filtering
   const filteredGames = games.filter((g) => {
     const searchMatch = g.title?.toLowerCase().includes(search.toLowerCase());
     const genreMatch =
-      !filterGenre ||
-      g.genres_list?.some((ge) => ge.name === filterGenre);
+      !filterGenre || g.genres_list?.some((ge) => ge.name === filterGenre);
 
     const platformMatch =
-      !filterPlatform ||
-      g.platforms_list?.some((pl) => pl.name === filterPlatform);
+      !filterPlatform || g.platforms_list?.some((pl) => pl.name === filterPlatform);
 
     const devMatch = !filterDeveloper || g.developer?.name === filterDeveloper;
     const pubMatch = !filterPublisher || g.publisher?.name === filterPublisher;
@@ -49,6 +49,7 @@ export default function GameDatabasePage() {
     return searchMatch && genreMatch && platformMatch && devMatch && pubMatch;
   });
 
+  // Sorting
   const sortedGames = [...filteredGames].sort((a, b) => {
     if (sortBy === "az") return a.title.localeCompare(b.title);
     if (sortBy === "za") return b.title.localeCompare(a.title);
@@ -74,59 +75,66 @@ export default function GameDatabasePage() {
     <div className="db-container">
       <div className="gf-inner">
 
+        {/* TITLE BAR */}
+        <h1 className="db-title">Game Database</h1>
+        <p className="db-subtitle">Browse • Filter • Explore</p>
+
         {/* SEARCH */}
-        <input
-          type="text"
-          className="db-search"
-          placeholder="Search games..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-
-        {/* FILTERS */}
-        <div className="db-filters">
-
-          <select value={filterGenre} onChange={(e) => setFilterGenre(e.target.value)}>
-            <option value="">Genre</option>
-            {genres.map((g) => (
-              <option key={g.id} value={g.name}>{g.name}</option>
-            ))}
-          </select>
-
-          <select value={filterPlatform} onChange={(e) => setFilterPlatform(e.target.value)}>
-            <option value="">Platform</option>
-            {platforms.map((p) => (
-              <option key={p.id} value={p.name}>{p.name}</option>
-            ))}
-          </select>
-
-          <select value={filterDeveloper} onChange={(e) => setFilterDeveloper(e.target.value)}>
-            <option value="">Developer</option>
-            {developers.map((d) => (
-              <option key={d.id} value={d.name}>{d.name}</option>
-            ))}
-          </select>
-
-          <select value={filterPublisher} onChange={(e) => setFilterPublisher(e.target.value)}>
-            <option value="">Publisher</option>
-            {publishers.map((p) => (
-              <option key={p.id} value={p.name}>{p.name}</option>
-            ))}
-          </select>
-
+        <div className="db-search-wrap">
+          <input
+            type="text"
+            className="db-search"
+            placeholder="Search games..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
 
-        {/* SORT */}
-        <div className="db-sort">
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-            <option value="">Sort By</option>
-            <option value="az">A → Z</option>
-            <option value="za">Z → A</option>
-            <option value="newest">Newest Release</option>
-            <option value="oldest">Oldest Release</option>
-            <option value="rating-high">Rating: High → Low</option>
-            <option value="rating-low">Rating: Low → High</option>
-          </select>
+        {/* FILTER PANEL */}
+        <div className="db-panel">
+
+          <div className="db-filters">
+            <select value={filterGenre} onChange={(e) => setFilterGenre(e.target.value)}>
+              <option value="">Genre</option>
+              {genres.map((g) => (
+                <option key={g.id} value={g.name}>{g.name}</option>
+              ))}
+            </select>
+
+            <select value={filterPlatform} onChange={(e) => setFilterPlatform(e.target.value)}>
+              <option value="">Platform</option>
+              {platforms.map((p) => (
+                <option key={p.id} value={p.name}>{p.name}</option>
+              ))}
+            </select>
+
+            <select value={filterDeveloper} onChange={(e) => setFilterDeveloper(e.target.value)}>
+              <option value="">Developer</option>
+              {developers.map((d) => (
+                <option key={d.id} value={d.name}>{d.name}</option>
+              ))}
+            </select>
+
+            <select value={filterPublisher} onChange={(e) => setFilterPublisher(e.target.value)}>
+              <option value="">Publisher</option>
+              {publishers.map((p) => (
+                <option key={p.id} value={p.name}>{p.name}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="db-sort">
+            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <option value="">Sort By</option>
+              <option value="az">A → Z</option>
+              <option value="za">Z → A</option>
+              <option value="newest">Newest Release</option>
+              <option value="oldest">Oldest Release</option>
+              <option value="rating-high">Rating: High → Low</option>
+              <option value="rating-low">Rating: Low → High</option>
+            </select>
+          </div>
+
         </div>
 
         {/* LOADING */}
@@ -140,7 +148,7 @@ export default function GameDatabasePage() {
             ))}
         </div>
 
-        {/* INFINITE SCROLL STATUS */}
+        {/* LOAD MORE STATUS */}
         {visibleCount < sortedGames.length && (
           <p className="db-loading-more">Loading more games...</p>
         )}

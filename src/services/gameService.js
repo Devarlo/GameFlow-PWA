@@ -100,6 +100,17 @@ export async function updateMyGame(gameId, updates) {
 // GET all my_games for user
 export async function getMyGames(user_id) {
   console.log("[gameService.getMyGames] Fetching for user_id:", user_id);
+  
+  // Verify session and use session user ID for security
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session?.user) {
+    console.warn("[gameService.getMyGames] No active session");
+    return [];
+  }
+  
+  const sessionUserId = session.user.id;
+  console.log("[gameService.getMyGames] Using session user ID:", sessionUserId);
+  
   const { data, error } = await supabase
     .from("my_games")
     .select(`
@@ -110,7 +121,7 @@ export async function getMyGames(user_id) {
       notes,
       games (*)
     `)
-    .eq("user_id", user_id)
+    .eq("user_id", sessionUserId)
     .order("added_at", { ascending: false });
 
   if (error) {
@@ -120,6 +131,8 @@ export async function getMyGames(user_id) {
     return [];
   }
 
-  console.log("[gameService.getMyGames] Success, returned", data?.length || 0, "games");
-  return data;
+  // Filter out entries with null games (orphaned entries)
+  const validData = (data || []).filter(entry => entry.games !== null);
+  console.log("[gameService.getMyGames] Success, returned", validData.length, "games (filtered from", data?.length || 0, "total)");
+  return validData;
 }

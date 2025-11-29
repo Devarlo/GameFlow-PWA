@@ -1,24 +1,43 @@
-.mg-container {
+/* MY GAMES — PS5 FUTURISTIC */
+
+.mg-page {
+  width: 100%;
   display: flex;
   justify-content: center;
+  padding-bottom: 90px;
+  color: var(--text-primary);
 }
 
-.mg-container .gf-inner {
+.gf-inner {
   width: 100%;
+  max-width: 1180px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* Filter */
-.mg-filters select {
-  padding: 10px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 8px;
-  border: none;
-  color: white;
+/* Header */
+.mg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* List layout */
+.mg-title {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.mg-filter-select {
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-primary);
+}
+
+/* List */
 .mg-list {
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -27,11 +46,13 @@
 /* Card */
 .mg-card {
   display: flex;
-  gap: 16px;
-  padding: 16px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.1);
+  gap: 18px;
+  padding: 18px;
+  border-radius: 16px;
+}
+
+.mg-cover-box {
+  min-width: 110px;
 }
 
 .mg-cover {
@@ -39,13 +60,62 @@
   height: 150px;
   object-fit: cover;
   border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.35);
 }
 
-.mg-info input,
-.mg-info select {
-  padding: 10px;
-  background: rgba(255,255,255,0.1);
-  color: white;
-  border: none;
-  border-radius: 8px;
+.mg-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mg-game-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Fields */
+.mg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mg-field label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.mg-input {
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  color: var(--text-primary);
+}
+
+/* States */
+.mg-empty,
+.mg-error,
+.mg-loading {
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .mg-card {
+    flex-direction: column;
+  }
+
+  .mg-cover {
+    width: 100%;
+    height: 220px;
+  }
 }

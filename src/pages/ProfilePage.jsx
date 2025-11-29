@@ -6,24 +6,29 @@ export default function ProfilePage() {
   const { user, logout } = useAuth();
   const { profile } = useProfile(user?.id);
 
+  const displayName = profile?.display_name || "Guest Player";
+  const avatar = profile?.avatar_url || "/default-avatar.png";
+
   return (
     <div className="profile-page">
       <div className="gf-inner">
-
-        {/* HEADER */}
-        <div className="profile-header">
+        
+        {/* TOP HEADER */}
+        <div className="profile-header ps-card">
           <div className="profile-avatar-wrap">
-            <img
-              src={profile?.avatar_url}
-              alt="avatar"
-              className="profile-avatar"
-            />
+            <img src={avatar} alt="avatar" className="profile-avatar" />
           </div>
 
-          <h2 className="profile-name">{profile?.display_name}</h2>
-          <p className="profile-email">{user?.email}</p>
-          <p className="profile-bio">{profile?.bio || "No bio yet."}</p>
+          <div className="profile-info">
+            <h2 className="profile-name">{displayName}</h2>
+            <p className="profile-email">{user?.email || "guest@example.com"}</p>
+
+            <p className="profile-bio">
+              {profile?.bio || "No bio yet. Update your profile to add more info."}
+            </p>
+          </div>
         </div>
+
 
         {/* STATS */}
         <div className="profile-stats">
@@ -43,9 +48,10 @@ export default function ProfilePage() {
           </div>
         </div>
 
+
         {/* RECENTLY PLAYED */}
         <div className="section">
-          <h3>Recently Played</h3>
+          <h3 className="section-title">Recently Played</h3>
           <div className="recent-grid">
             <div className="recent-card"></div>
             <div className="recent-card"></div>
@@ -53,27 +59,31 @@ export default function ProfilePage() {
           </div>
         </div>
 
+
         {/* ACHIEVEMENTS */}
         <div className="section">
-          <h3>Achievements</h3>
+          <h3 className="section-title">Achievements</h3>
+
           <div className="achievements">
-            <div className="badge">🏆 Starter</div>
-            <div className="badge">🔥 10 Games Played</div>
-            <div className="badge">⭐ Collector</div>
+            <div className="badge ps-badge">🏆 Starter</div>
+            <div className="badge ps-badge">🔥 10 Games Played</div>
+            <div className="badge ps-badge">⭐ Collector</div>
           </div>
         </div>
 
-        {/* SETTINGS + LOGOUT */}
+
+        {/* SETTINGS */}
         <div className="section">
-          <h3>Settings</h3>
-          <div className="settings-card">
+          <h3 className="section-title">Settings</h3>
+
+          <div className="settings-card ps-card">
             <p>Update Profile</p>
             <p>Account Security</p>
             <p>Notifications</p>
 
             {/* LOGOUT BUTTON */}
             <button className="logout-btn" onClick={logout}>
-              🚪 Logout
+              Logout
             </button>
           </div>
         </div>

@@ -1,138 +1,150 @@
-/* RESET & GLOBAL */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* index.css — PS5 Futuristic Global Theme
+   - Theme tokens
+   - Reset
+   - Base utilities
+   - Card / shadow system
+   - Scrollbar for app scroll area (not body)
+*/
 
-html, body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden; /* hanya .app-content yg boleh scroll */
-  background: var(--bg-dark);
-  font-family: 'Inter', sans-serif;
-  color: var(--text-primary);
-
-  display: block !important; /* mencegah flex center bawaan Vite */
-}
+/* RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; width: 100%; }
+html, body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
 /* GOOGLE FONT */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-/* PALET WARNA */
+/* THEME TOKENS */
 :root{
-  --bg: #2D2327;              /* darkest */
-  --bg-deep: #45364B;
-  --card-bg: rgba(255,255,255,0.04);
-  --card-glass: rgba(255,255,255,0.03);
-  --text-primary: #E9E3E6;    /* light */
+  /* palette */
+  --bg-900: #0e0a0c;
+  --bg-800: #120b0e;
+  --bg-700: #241a1b;
+  --panel: rgba(255,255,255,0.02);
+
+  --text-primary: #E9E3E6;
   --muted: #B5C2B7;
-  --accent-1: #8C93A8;        /* cool gray */
-  --accent-plum: #62466B;     /* deep plum */
-  --glow-purple: rgba(130,80,200,0.18);
-  --glow-blue: rgba(70,150,255,0.12);
-  --neon: linear-gradient(135deg, rgba(120,80,220,0.22), rgba(70,120,255,0.18));
-  --radius-lg: 20px;
-  --radius-md: 12px;
+  --muted-2: #9fa6af;
+
+  --plum-600: #62466B;
+  --plum-500: #7f57a0;
+  --accent-blue: #4b8bff;
+
+  --glass-01: rgba(255,255,255,0.03);
+  --glass-02: rgba(255,255,255,0.05);
+
+  --glow-purple: 0 6px 36px rgba(120,80,220,0.14);
+  --glow-blue: 0 6px 28px rgba(70,120,255,0.08);
+
   --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --shadow-soft: 0 8px 30px rgba(6,4,8,0.6);
+  --z-top: 9999;
+
+  /* spacing */
+  --gutter-xs: 8px;
+  --gutter-sm: 12px;
+  --gutter-md: 20px;
+  --gutter-lg: 32px;
+
+  /* helpers */
+  --max-content-width: 1180px;
 }
 
-
-/* SCROLLBAR GLOBAL (matikan track halaman) */
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none; /* HILANGKAN scrollbar halaman */
+/* BASE */
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, var(--bg-900), var(--bg-800));
+  color: var(--text-primary);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Don't hide page scroll — we'll use scroll inside app-shell */
+html, body { overflow: auto; }
+
+/* GLOBAL CONTAINERS */
 .gf-inner {
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--max-content-width);
   margin: 0 auto;
-  padding: 20px 0;
-}
-body {
-  background: #1c1417;
+  padding: 18px 20px;
 }
 
-/* PS DARK CARD */
+/* UTILS */
+.container-row { display:flex; gap:var(--gutter-md); align-items:center; }
+.flex { display:flex; }
+.center { display:flex; align-items:center; justify-content:center; }
+
+/* TEXT */
+.h1 { font-size: 28px; font-weight:700; color:var(--text-primary); }
+.h2 { font-size:20px; font-weight:700; color:var(--text-primary); }
+.subtle { color: var(--muted); font-weight:500; }
+
+/* GLASS CARD (primary) */
 .ps-card {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: var(--radius-lg);
   padding: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: 0.2s ease;
-  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(6px) saturate(110%);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
 .ps-card:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-4px);
+  transform: translateY(-6px);
+  box-shadow: var(--glow-purple), var(--shadow-soft);
 }
 
-/* Database container */
-.db-container .gf-inner {
-  background: rgba(255,255,255,0.03);
-  border-radius: 18px;
-  padding: 20px;
-  border: 1px solid rgba(255,255,255,0.05);
-  backdrop-filter: blur(8px);
+/* CARD VARIANTS */
+.card-sm { padding:10px; border-radius: var(--radius-md); }
+.card-md { padding:14px; border-radius: var(--radius-md); }
+
+/* BUTTONS (primary & ghost) */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer;
+  border: none;
+}
+.btn-primary {
+  background: linear-gradient(90deg, rgba(140,80,220,0.88), rgba(70,120,255,0.88));
+  color: white;
+  box-shadow: 0 8px 30px rgba(80,40,160,0.15);
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text-primary);
 }
 
-/* Profile & MyGames */
-.mg-container,
-.profile-page {
-  background: transparent !important;
+/* INPUTS */
+.input {
+  width:100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--text-primary);
+  outline: none;
+}
+.input:focus {
+  box-shadow: var(--glow-blue);
+  border-color: rgba(75,139,255,0.28);
 }
 
-/* Stats & settings fix */
-.settings-card,
-.stat-box {
-  background: rgba(255,255,255,0.06) !important;
-  border: 1px solid rgba(255,255,255,0.08) !important;
-}
+/* SCROLLBAR FOR app-inner (not global) -> kept minimal */
+::-webkit-scrollbar { width: 10px; height:10px; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.04); border-radius:999px; }
+::-webkit-scrollbar-track { background: transparent; }
 
-/* === GLOBAL LAYOUT FIX === */
-body {
-  background: #110b0c; /* lebih gelap seperti PS Store */
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
+/* SMALL HELPERS */
+.muted { color:var(--muted); }
+.kicker { font-size:12px; color:var(--muted); }
 
-/* Hilangkan max-width di semua container */
-.dashboard-container,
-.db-container,
-.mg-container,
-.profile-page {
-  width: 100% !important;
-  max-width: 100% !important;
-  padding: 20px 40px; /* kanan kiri lebih longgar */
-  box-sizing: border-box;
-}
-
-/* buat section tidak berada di tengah */
-.dashboard-container > *,
-.db-container > *,
-.profile-page > * {
-  margin-left: 0 !important;
-}
-
-/* quick menu full */
-.quick-menu {
-  width: 100%;
-}
-
-/* database wrapper */
-.db-container {
-  background: rgba(255,255,255,0.03);
-  border-radius: 18px;
-  padding: 30px;
-  border: 1px solid rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-}
-
-/* remove central alignment */
-.profile-header,
-.profile-stats,
-.section {
-  width: 100%;
-  text-align: left !important;
+/* RESPONSIVE */
+@media (max-width: 900px){
+  .h1 { font-size:22px; }
+  .gf-inner { padding: 14px; }
 }

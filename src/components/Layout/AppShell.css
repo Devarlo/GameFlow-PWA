@@ -1,50 +1,58 @@
-/* ===== APP WRAPPER ===== */
+/* AppShell.css — layout and content scroll area for PS5 theme */
+
+/* root app shell */
 .app-shell {
-  display: flex;
-  flex-direction: column;
   height: 100vh;
   width: 100%;
-  background: var(--bg-dark);
-  overflow: hidden; /* prevent body scroll */
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, rgba(16,10,16,0.95), rgba(22,12,18,0.98));
+  color: var(--text-primary);
+  overflow: hidden;
 }
 
-/* ===== FULL WIDTH SCROLL WRAPPER ===== */
+/* main scroll area */
 .scroll-wrapper {
   flex: 1;
   overflow-y: auto;
-  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 96px; /* space for bottom navigator */
 }
 
-/* ===== INNER CONTENT (CENTERED) ===== */
+/* inner content center */
 .app-inner {
   width: 100%;
-  max-width: 1180px;
+  max-width: var(--max-content-width);
   margin: 0 auto;
-  padding: 20px 24px 90px;
+  padding: 28px 24px;
   box-sizing: border-box;
+  min-height: calc(100vh - 160px);
 }
 
-/* ===== CUSTOM SCROLLBAR (NOW AT RIGHT EDGE) ===== */
-.scroll-wrapper::-webkit-scrollbar {
-  width: 10px;
+/* top safe area (optional hero) */
+.app-hero {
+  margin-bottom: 18px;
 }
+
+/* small container helpers */
+.section {
+  margin-bottom: 22px;
+}
+
+/* keep scroll wrapper nice */
+.scroll-wrapper::-webkit-scrollbar { width: 12px; }
 .scroll-wrapper::-webkit-scrollbar-thumb {
-  background: rgba(80, 68, 78, 0.6);
-  border-radius: 9999px;
-}
-.scroll-wrapper::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.03);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border-radius: 999px;
 }
 
-/* ===== BOTTOM NAV ===== */
-.bottom-nav 
-{ font-size: 16px; /* size the label smaller; icon is handled via .icon */ 
-  color: var(--text-primary); 
-  text-decoration: none; 
-  transition: all 0.2s ease; 
-} 
+/* ensure gf-inner works inside app-inner */
+.gf-inner { padding: 0; }
 
-.bottom-nav .nav-item:hover { 
-  transform: scale(1.15); 
-  color: var(--accent-purple); 
+/* z-index helpers so bottom nav sits above content */
+.app-shell .bottom-nav {
+  z-index: 60;
 }
+
+/* small utility */
+.centered-block { display:flex; align-items:center; justify-content:center; }

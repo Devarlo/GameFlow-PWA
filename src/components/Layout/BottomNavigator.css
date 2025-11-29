@@ -1,63 +1,67 @@
+/* BottomNavigator.css — elevated glass bottom nav, PS5-inspired */
+
 .bottom-nav {
   position: fixed;
-  bottom: 18px; /* raised slightly above bottom */
+  bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 32px);
+  width: calc(100% - 40px);
   max-width: 980px;
-  height: 64px;
-  background: var(--nav-bg);
+  height: 68px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--nav-border); /* subtle border */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 12px 40px rgba(8,6,12,0.8), 0 0 40px rgba(120,80,220,0.06);
+  backdrop-filter: blur(10px) saturate(120%);
   z-index: var(--z-top);
 }
 
+/* nav item */
 .bottom-nav .nav-item {
-  flex: 1;
-  text-align: center;
-  color: #cfcfcf;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  transition: 0.2s ease-in-out;
-  padding-top: 6px;
+  color: var(--muted);
   font-size: 12px;
+  width: 22%;
+  padding: 6px;
+  border-radius: 10px;
+  transition: transform .15s ease, color .15s ease, background .15s ease;
 }
 
+/* icon */
 .bottom-nav .nav-item .icon {
   font-size: 20px;
-}
-.bottom-nav .nav-item .label {
-  font-size: 11px;
-  display: none; /* visible on larger screens */
-  opacity: 0.9;
-  margin-top: 6px;
+  line-height: 1;
 }
 
-.bottom-nav .nav-item.active {
-  color: var(--color-accent);
-  font-weight: 600;
-}
-
+/* active state */
+.bottom-nav .nav-item.active,
 .bottom-nav .nav-item:hover {
-  transform: translateY(-3px);
-  color: var(--color-primary);
+  transform: translateY(-6px) scale(1.02);
+  color: var(--text-primary);
+  background: linear-gradient(90deg, rgba(120,80,220,0.06), rgba(70,120,255,0.04));
+  box-shadow: 0 10px 30px rgba(80,40,160,0.08);
 }
 
-/* Desktop version */
+/* label visibility on desktop */
+.bottom-nav .nav-item .label { display: none; opacity: 0.95; font-weight:600; }
+
+/* desktop: show label */
 @media (min-width: 768px) {
-  .bottom-nav {
-    max-width: 900px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  }
-  .bottom-nav .nav-item {
-    font-size: 14px;
-  }
-  .bottom-nav .nav-item .label {
-    display: block;
-  }
+  .bottom-nav { height: 72px; padding: 8px 18px; border-radius: 999px; }
+  .bottom-nav .nav-item { font-size: 13px; width: auto; padding: 8px 12px; flex-direction: row; gap: 10px; }
+  .bottom-nav .nav-item .label { display: inline-block; }
+}
+
+/* mobile safe spacing so it doesn't collide with device nav */
+@media (max-width: 420px) {
+  .bottom-nav { bottom: 12px; width: calc(100% - 20px); height: 64px; }
 }

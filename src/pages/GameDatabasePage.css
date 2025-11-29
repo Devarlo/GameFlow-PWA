@@ -1,99 +1,124 @@
-/* GameDatabasePage.css - PS5 Futuristic */
-.db-container{
-  min-height: calc(100vh - 80px);
-  padding: 28px 20px 80px;
-  background: transparent;
-  display:flex;
-  justify-content:center;
+/* === PAGE WRAPPER === */
+.db-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 22px 90px;
+  color: var(--text-primary);
 }
+
 .gf-inner {
-  width:100%;
-  max-width:1100px;
-  display:flex;
-  flex-direction:column;
-  gap:18px;
+  width: 100%;
+  max-width: 1180px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
-/* search row */
+/* === TITLES === */
+.db-title {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.db-subtitle {
+  opacity: 0.7;
+  margin-top: -8px;
+  font-size: 14px;
+}
+
+/* === SEARCH BOX === */
+.db-search-wrap {
+  width: 100%;
+}
+
 .db-search {
-  padding: 16px 18px;
+  width: 100%;
+  padding: 14px 18px;
   border-radius: 14px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border: 1px solid rgba(255,255,255,0.04);
-  box-shadow: 0 10px 30px rgba(16,10,18,0.5), 0 0 18px rgba(70,90,220,0.05);
-  width:100%;
-  font-size:15px;
-  outline:none;
-  color:var(--text-primary);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text-primary);
+  font-size: 15px;
+  box-shadow: 0 12px 28px rgba(10,8,12,0.45);
+  backdrop-filter: blur(6px);
 }
 
-/* filter row - compact with chips */
-.db-filters{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
+.db-search:focus {
+  outline: 2px solid rgba(120,80,220,0.25);
 }
 
-/* select appearance */
-.db-filters select, .db-sort select {
-  padding:12px 14px;
-  border-radius:12px;
-  background: rgba(255,255,255,0.02);
-  border:1px solid rgba(255,255,255,0.04);
-  color:var(--text-primary);
-  outline:none;
-  min-width:140px;
+/* === FILTER PANEL === */
+.db-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
-/* sort */
-.db-sort{ width:240px; margin-left:auto; }
+/* FILTER SELECTS */
+.db-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 
-/* grid */
-.db-grid{
-  display:grid;
+.db-filters select,
+.db-sort select {
+  padding: 12px 14px;
+  border-radius: 12px;
+  min-width: 150px;
+  background: rgba(255,255,255,0.03);
+  color: var(--text-primary);
+  border: 1px solid rgba(255,255,255,0.05);
+  font-size: 14px;
+  backdrop-filter: blur(6px);
+  transition: 0.18s;
+}
+
+.db-filters select:hover,
+.db-sort select:hover {
+  border-color: rgba(140,147,220,0.25);
+}
+
+/* SORT DROPDOWN */
+.db-sort {
+  margin-left: auto;
+}
+
+/* === GRID === */
+.db-grid {
+  display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap:18px;
-  margin-top:6px;
+  gap: 20px;
+  margin-top: 4px;
 }
 
-/* card */
-.db-card{
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius: 14px;
-  padding:10px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  border:1px solid rgba(255,255,255,0.03);
-  box-shadow: 0 16px 38px rgba(12,8,16,0.55), 0 0 18px rgba(100,70,220,0.05);
-  cursor:pointer;
-  transition: transform .15s ease, box-shadow .15s ease;
+/* === LOADING === */
+.db-loading,
+.db-loading-more {
+  text-align: center;
+  padding: 12px;
+  opacity: 0.7;
 }
 
-/* media */
-.db-card img{
-  width:100%;
-  height:160px;
-  object-fit:cover;
-  border-radius:10px;
-}
+/* === RESPONSIVE === */
+@media (max-width: 780px) {
+  .db-title {
+    font-size: 22px;
+  }
 
-/* text */
-.db-card h4{ margin:0; font-size:15px; font-weight:700; color:var(--text-primary); }
-.db-card p{ margin:0; font-size:12px; color:var(--muted); }
+  .db-panel {
+    flex-direction: column;
+  }
 
-/* hover */
-.db-card:hover{
-  transform: translateY(-8px);
-  box-shadow: 0 30px 80px rgba(12,6,18,0.75), 0 0 40px rgba(100,70,240,0.14);
-}
+  .db-sort {
+    margin-left: 0;
+    width: 100%;
+  }
 
-/* loading text */
-.db-loading, .db-loading-more{ color: var(--muted); text-align:center; padding:12px; }
-
-/* responsive */
-@media(max-width:700px){
-  .db-grid{ grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); }
-  .db-card img{ height:120px; }
-  .db-sort{ width:100%; margin-left:0; }
+  .db-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
 }

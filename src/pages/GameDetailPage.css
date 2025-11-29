@@ -5,7 +5,7 @@
   display:flex;
   justify-content:center;
 }
-.gf-inner{ width:100%; }
+.gf-inner{ width:100%; max-width:1100px; }
 
 /* layout */
 .detail-grid{

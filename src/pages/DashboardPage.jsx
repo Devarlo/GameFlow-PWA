@@ -30,17 +30,25 @@ export default function DashboardPage() {
       <div className="gf-inner">
 
         {/* GREETING */}
-        <div className="dashboard-greeting">
-          <div className="greeting-avatar"> <img
-          src="/public/GameFlow.png"
-          alt="App Logo"
-        /></div>
+<div className="dashboard-greeting">
 
-          <div>
-            <span>Welcome, {user?.email}</span>
-            <div className="greeting-sub">Find your next game — curated picks for you</div>
-          </div>
-        </div>
+  <div className="greeting-avatar">
+    <img
+      src="/GameFlow.png"
+      alt="App Logo"
+      className="logo-img"
+    />
+  </div>
+
+  <div className="greeting-text">
+    <h2>Welcome, {user?.email}</h2>
+    <div className="greeting-sub">
+      Find your next game — curated picks for you
+    </div>
+  </div>
+
+</div>
+
 
         {/* QUICK MENU */}
         <div className="quick-menu">

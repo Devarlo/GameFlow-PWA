@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SplashScreen.css";
+import logo from "/GameFlow.png";
 
 export default function SplashScreen() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function SplashScreen() {
   return (
     <div className="splash-container">
       <img
-        src="/GameFlow.png"
+        src={logo}
         alt="App Logo"
         className="w-32 h-32 splash-logo mb-6"
       />

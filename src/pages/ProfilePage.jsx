@@ -3,7 +3,7 @@ import { useProfile } from "../hooks/useProfile";
 import "./ProfilePage.css";
 
 export default function ProfilePage() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { profile } = useProfile(user?.id);
 
   return (
@@ -63,13 +63,18 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* SETTINGS */}
+        {/* SETTINGS + LOGOUT */}
         <div className="section">
           <h3>Settings</h3>
           <div className="settings-card">
             <p>Update Profile</p>
             <p>Account Security</p>
             <p>Notifications</p>
+
+            {/* LOGOUT BUTTON */}
+            <button className="logout-btn" onClick={logout}>
+              🚪 Logout
+            </button>
           </div>
         </div>
 

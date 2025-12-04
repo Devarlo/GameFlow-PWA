@@ -1,25 +1,42 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "../config/supabaseClient";
 
 export function useProfile(userId) {
   const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (!userId) return;
+  const loadProfile = useCallback(
+    async (idOverride = null) => {
+      const targetId = idOverride || userId;
+      if (!targetId) return;
 
-    async function loadProfile() {
+      setLoading(true);
+      setError(null);
+
       const { data, error } = await supabase
         .from("profiles")
         .select("*")
-        .eq("id", userId)
+        .eq("id", targetId)
         .single();
 
-      if (!error) setProfile(data);
-    }
+      if (error) {
+        console.error("[useProfile] Error loading profile:", error);
+        setError(error);
+      } else {
+        setProfile(data);
+      }
 
-    loadProfile();
-  }, [userId]);
+      setLoading(false);
+    },
+    [userId]
+  );
 
-  return { profile };
+  useEffect(() => {
+    if (!userId) return;
+    loadProfile(userId);
+  }, [userId, loadProfile]);
+
+  return { profile, loading, error, refreshProfile: loadProfile, setProfile };
 }

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { useProfile } from "../hooks/useProfile";
 import { getNewGames, getTrendingGames } from "../services/dashboardService";
 import "./DashboardPage.css";
 
 export default function DashboardPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { profile } = useProfile(user?.id);
 
   const [newGames, setNewGames] = useState([]);
   const [trendingGames, setTrendingGames] = useState([]);
@@ -35,7 +37,7 @@ export default function DashboardPage() {
           </div>
 
           <div className="dash-greet-text">
-            <h2 className="greet-title">Welcome, {user?.email}</h2>
+            <h2 className="greet-title">Welcome {profile?.display_name || user?.email}</h2>
             <p classname="greet-sub">Find your next favorite game</p>
           </div>
         </div>
@@ -43,17 +45,23 @@ export default function DashboardPage() {
         {/* QUICK MENU */}
         <div className="quick-row">
           <div className="quick-card" onClick={() => navigate("/app/games")}>
-            <span className="qi-icon">🎮</span>
+            <span className="qi-icon">
+              <img className="navcon" src="/database.png" alt="Games Icon" />
+            </span>
             <p>Game Database</p>
           </div>
 
           <div className="quick-card" onClick={() => navigate("/app/minigame")}>
-            <span className="qi-icon">🕹️</span>
+            <span className="qi-icon">
+              <img className="navcon" src="/joystick.png" alt="Mini Game Icon" />
+            </span>
             <p>Mini Game</p>
           </div>
 
           <div className="quick-card" onClick={() => navigate("/app/mygames")}>
-            <span className="qi-icon">📚</span>
+            <span className="qi-icon">
+              <img className="navcon" src="/gamepad.png" alt="My Games Icon" />
+            </span>
             <p>My Games</p>
           </div>
         </div>
